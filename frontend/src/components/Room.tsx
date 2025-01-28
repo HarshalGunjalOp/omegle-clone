@@ -8,7 +8,7 @@ declare global {
 import { Socket, io } from "socket.io-client";
 // import ChatBox from "./Chat";
 
-const URL = "https://omegle-clone-backend-six.vercel.app/";
+const URL = "http://localhost:3000";
 
 export const Room = ({
     name,
