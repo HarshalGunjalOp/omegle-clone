@@ -68,6 +68,15 @@ export class UserManager {
         socket.on("add-ice-candidate", ({candidate, roomId, type}) => {
             this.roomManager.onIceCandidates(roomId, socket.id, candidate, type);
         });
+
+        socket.on("chat-message", ({ message, roomId }: { message: string; roomId: string }) => {
+            this.roomManager.onChatMessage(roomId, socket.id, message);
+        });
+
+        socket.on("disconnect", () => {
+            console.log(`User disconnected: ${socket.id}`);
+            this.removeUser(socket.id);
+        });
     }
 
 }

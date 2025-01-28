@@ -63,6 +63,17 @@ export class RoomManager {
         receivingUser.socket.emit("add-ice-candidate", ({candidate, type}));
     }
 
+    onChatMessage(roomId: string, senderSocketId: string, message: string) {
+        const room = this.rooms.get(roomId);
+        if (!room) {
+            console.error(`Room not found: ${roomId}`);
+            return;
+        }
+
+        const receivingUser = room.user1.socket.id === senderSocketId ? room.user2 : room.user1;
+        receivingUser.socket.emit("chat-message", { sender: senderSocketId, message, roomId });
+    }
+
     generate() {
         return GLOBAL_ROOM_ID++;
     }
