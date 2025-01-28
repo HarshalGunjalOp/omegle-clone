@@ -26,6 +26,9 @@ io.on('connection', (socket: Socket) => {
   })
 });
 
-server.listen(process.env.PORT, 3000, () => {
-    console.log('Server is running');
-});
+// Keep the listen call for local development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(3000, () => {
+    console.log('Server running on port 3000');
+  });
+}
